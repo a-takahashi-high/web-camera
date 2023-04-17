@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AnalysisController;
@@ -18,6 +19,11 @@ use App\Http\Controllers\Api\AnalysisController;
 /*Route::group( ['middleware' => 'api'], function(){
     Route::get('analysis', 'AnalysisController@getAllAnalysisMain');
 });*/
+
+Route::get('/schedule_all', [ScheduleController::class, 'getScheduleAll']);
+
+Route::get('/schedules', [ScheduleController::class, 'getSchedule']);
+
 Route::get('/analysis', [AnalysisController::class, 'getAllAnalysisMain']);
 
 Route::get('/result', [AnalysisController::class, 'getResult']);

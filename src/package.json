@@ -35,6 +35,7 @@
         "@fullcalendar/list": "^6.1.5",
         "@fullcalendar/react": "^6.1.5",
         "@fullcalendar/timegrid": "^6.1.5",
+        "@reduxjs/toolkit": "^1.9.3",
         "@vitejs/plugin-basic-ssl": "^1.0.1",
         "lsof": "^0.1.0",
         "react-player": "^2.12.0",

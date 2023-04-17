@@ -3,12 +3,12 @@ require("../bootstrap");
 import React from "react";
 import { createRoot} from 'react-dom/client';
 import { Provider } from 'react-redux';
-import createStore from "../reducks/store/store";
+import { store } from "../reducks/store/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TopCamera from "./TopCamera"
 import Top from "./Top"
 
-const store = createStore();
+//const store = createStore();
 
 if (document.getElementById("root")) {
     const container = document.getElementById('root');

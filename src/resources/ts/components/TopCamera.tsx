@@ -53,7 +53,9 @@ function TopCamera() {
         start();
         break;
       case Resolutions.STATE.PLAY:
+        break;
       case Resolutions.STATE.ANALYSIS:
+        
         break;
       case Resolutions.STATE.REQUEST:
         sendImage();
@@ -236,9 +238,8 @@ function TopCamera() {
   //画像解析開始
   function startAnalysis() {
     state.current = Resolutions.STATE.REQUEST;
-    console.log("状態確認:"+state);
     setVisible(true);
-    sendImage();
+    //sendImage();
   }
 
   // 解析対象画像送信
@@ -399,7 +400,7 @@ function TopCamera() {
       <div id="overlay" className="overlay" style={{ visibility: visible ? "visible" : "hidden" }} >
         <div style={{ position: "relative" }}>
           <div>
-            <a style={{ position: "absolute", left:-20, top: -50 }}>解析中...</a>
+            <a style={{ position: "absolute", left:10, top: -10, color: 'white', fontSize: 30 }}>解析中...</a>
             <div className="loader" ></div>
           </div>
         </div>
