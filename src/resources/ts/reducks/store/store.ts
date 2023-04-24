@@ -1,8 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./slice";  // reducerをimport
+import analysisReducer from "./slice";  // reducerをimport
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer, // reducerを追加
+    analysis: analysisReducer, // reducerを追加
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          'analysis/updatePhoto', // この action に対しては serializableCheck しない
+        ]
+      },
+    }),
 });

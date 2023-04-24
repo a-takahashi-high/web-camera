@@ -50,7 +50,8 @@ export const Resolutions = {
       INIT : 0,      // 初期
       PLAY : 1,      // 通常
       REQUEST : 2,   // 通信中
-      ANALYSIS : 3   // 解析中
+      ANALYSIS : 3,  // 解析中
+      COMP : 4,      // 完了
     },
 
     SEND_FILE: "send_file",

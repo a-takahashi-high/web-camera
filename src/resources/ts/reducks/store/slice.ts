@@ -9,44 +9,30 @@ import { createSlice } from "@reduxjs/toolkit";
   };*/
   const initialState = {
     schedules:[],
-    videos:{
-      backCameraId: "",
-      osType: 0,
-      checkResolutions:[],
-      leftIndex: 0,
-      rightIndex: 0,
-      midIndex: 0,
-      cameraResolutionsList: {},
-      cameraOptions: null,
-      videoSelect: null,
-      maxResolutionWidth: 0,
-      maxResolutionHeight: 0,
-      videoInputs: [],
-      stream: null,
-      setVideoWidth: 0,
-      setVideoHeight: 0
-    }
+    photos:[],
+    videos:{}
   }
-  const cartSlice = createSlice({
-    name: "cart", // sliceの名前、useSelectorでアクセスするときに使う
+  const analysisSlice = createSlice({
+    name: "analysis", // sliceの名前、useSelectorでアクセスするときに使う
     initialState, // 初期の状態
     reducers: {
       // プロパティ名がactionCreatorとして作られる
       updateVideo: (state, actions) => {
-        // 空にする
-        return {schedules:state.schedules,videos:actions.payload};
+        return {schedules:state.schedules,photos:state.photos,videos:actions.payload};
       },
       updateSchedule: (state, actions) => {
-        // 空にする
-        return {videos:state.videos,schedules:actions.payload};
+        return {videos:state.videos,photos:state.photos,schedules:actions.payload};
+      },
+      updatePhoto: (state, actions) => {
+        return {videos:state.videos,schedules:state.schedules,photos:actions.payload};
       },
     }, // reducerを格納、actionCreatorはreducerを作成すると自動的に作られる
   });
   
-  // console.log(cartSlice); //actions.clearCartがある
-  export const { updateSchedule } = cartSlice.actions;
-  export const { updateVideo } = cartSlice.actions;
-  export default cartSlice.reducer; // reducerをexport
+  export const { updateSchedule } = analysisSlice.actions;
+  export const { updateVideo } = analysisSlice.actions;
+  export const { updatePhoto } = analysisSlice.actions;
+  export default analysisSlice.reducer; // reducerをexport
 
 
 

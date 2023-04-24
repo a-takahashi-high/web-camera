@@ -5,8 +5,10 @@ import { createRoot} from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from "../reducks/store/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TopCamera from "./TopCamera"
 import Top from "./Top"
+import Photograph from "./Photograph";
+import PhotographList from "./PhotographList";
+
 
 //const store = createStore();
 
@@ -18,7 +20,8 @@ if (document.getElementById("root")) {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Top />} />
-                    <Route path="/camera" element={<TopCamera />} />
+                    <Route path="/camera" element={<Photograph />} />
+                    <Route path="/photolist" element={<PhotographList />} />
                 </Routes>
             </BrowserRouter>
         </Provider>

@@ -4,11 +4,15 @@ import axios from "axios";
 import {VideoArea, VideoAreaHandles} from "./VideoArea";
 import {Resolutions} from "../../ts/SystemConst/const";
 import "../../css/app.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from 'react-router-dom';
 //import { useDispatch, useSelector } from "react-redux";
 //import { SET_VIDEO, setAction } from "../reducks/video/actions";
 //import {Videos} from "../reducks/store/initialState";
 
 function TopCamera() {
+  const location = useLocation(); 
+  const param = location.state as Object; //型を無理やり与える
   //const dispatch = useDispatch();
   //const selector = useSelector((state:Videos) => state);
   /*dispatch(setAction({
@@ -36,6 +40,7 @@ function TopCamera() {
   const childRef = useRef<VideoAreaHandles>(null);
   const videoListRef = useRef<Array<HTMLCanvasElement | null>>([]);
   const checkListRef = useRef<Array<HTMLInputElement | null>>([]);
+  const { schedules,videos } = useSelector((store:any) => store.analysis);
 
   //let state = Resolutions.STATE.INIT;
 
@@ -50,6 +55,8 @@ function TopCamera() {
         //videoSelect = document.querySelector('select#videoSource');
         //console.log("チェック");
         //console.log(selector.backCameraId);
+        console.log("パラメータ：" + (param as any).test.toString())
+
         start();
         break;
       case Resolutions.STATE.PLAY:

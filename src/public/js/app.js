@@ -11767,7 +11767,8 @@ exports.Resolutions = {
     INIT: 0,
     PLAY: 1,
     REQUEST: 2,
-    ANALYSIS: 3 // 解析中
+    ANALYSIS: 3,
+    COMP: 4 // 完了
   },
 
   SEND_FILE: "send_file",
@@ -11788,6 +11789,358 @@ exports.Resolutions = {
 
 
 __webpack_require__(/*! ./components/index */ "./resources/ts/components/index.tsx");
+
+/***/ }),
+
+/***/ "./resources/ts/components/Photograph.tsx":
+/*!************************************************!*\
+  !*** ./resources/ts/components/Photograph.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var VideoArea_1 = __webpack_require__(/*! ./VideoArea */ "./resources/ts/components/VideoArea.tsx");
+var const_1 = __webpack_require__(/*! ../SystemConst/const */ "./resources/ts/SystemConst/const.ts");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+__webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var react_router_dom_2 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var slice_1 = __webpack_require__(/*! ../reducks/store/slice */ "./resources/ts/reducks/store/slice.ts");
+function Photograph() {
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var _ref = (0, react_1.useState)("撮影"),
+    _ref2 = _slicedToArray(_ref, 2),
+    buttonText = _ref2[0],
+    setButtonText = _ref2[1];
+  var location = (0, react_router_dom_2.useLocation)();
+  var param = location.state; //型を無理やり与える
+  var dispatch = (0, react_redux_1.useDispatch)();
+  var _ref3 = (0, react_redux_1.useSelector)(function (store) {
+      return store.analysis;
+    }),
+    photos = _ref3.photos,
+    videos = _ref3.videos;
+  var _ref4 = (0, react_1.useState)(false),
+    _ref5 = _slicedToArray(_ref4, 2),
+    visible = _ref5[0],
+    setVisible = _ref5[1];
+  var _ref6 = (0, react_1.useState)([]),
+    _ref7 = _slicedToArray(_ref6, 2),
+    saveCanvasList = _ref7[0],
+    setCanvasList = _ref7[1];
+  var state = (0, react_1.useRef)(const_1.Resolutions.STATE.INIT);
+  var childRef = (0, react_1.useRef)(null);
+  var videoListRef = (0, react_1.useRef)(null);
+  var checkListRef = (0, react_1.useRef)([]);
+  //let state = Resolutions.STATE.INIT;
+  (0, react_1.useEffect)(function () {
+    //console.log("状態:" + state);
+    switch (state.current) {
+      case const_1.Resolutions.STATE.INIT:
+        start();
+        break;
+      case const_1.Resolutions.STATE.PLAY:
+        break;
+      case const_1.Resolutions.STATE.ANALYSIS:
+        break;
+    }
+  });
+  // 開始処理
+  function start() {
+    console.log("チェック");
+    childRef.current.setVideo();
+  }
+  //画像撮影の準備
+  function shootImagePreparation() {
+    // 撮影タイマー待機
+    var timerElement = document.getElementById('timer');
+    var countElement = document.getElementById('count');
+    var count = timerElement == null ? 0 : Number(timerElement.value);
+    if (count > 0) {
+      countElement.textContent = count.toString();
+      playSeCountDown();
+      return new Promise(function (resolve) {
+        var timer = setInterval(function () {
+          // 撮影タイマー待機
+          var count = countElement == null ? 0 : Number(countElement.textContent);
+          if (count > 1) {
+            countElement.textContent = (count - 1).toString();
+            playSeCountDown();
+          } else {
+            countElement.textContent = '0';
+            shootImageMain();
+            clearInterval(timer);
+            return resolve();
+          }
+        }, 1000);
+      });
+    } else {
+      shootImageMain();
+    }
+  }
+  // 画像撮影
+  function shootImageMain() {
+    var _a;
+    var video = (_a = childRef.current) === null || _a === void 0 ? void 0 : _a.getVideo();
+    //var div = document.createElement("div");
+    //div.setAttribute("className", "canvas_list");
+    var canvas = document.createElement("canvas");
+    //canvasの描画モードを2sに
+    var ctx = canvas.getContext('2d');
+    //var checkbox = document.createElement('input');
+    //checkbox.setAttribute("type", "checkbox");
+    //checkbox.setAttribute("name", "image[]");
+    //同じサイズをcanvasに指定
+    var osType = videos.osType;
+    //let osType:number = childRef.current!.getOsType();
+    //let cameraOptions:HTMLInputElement | null = childRef.current!.getCameraOptions();
+    var cameraOptions = videos.cameraOptions;
+    //let cameraResolutionsList:{ [key:string]: { [key:string]: number; }; } = childRef.current!.getCameraResolutionsList();
+    var cameraResolutionsList = videos.cameraResolutionsList;
+    //let setVideoHeight = childRef.current!.getVideoHeight();
+    var setVideoHeight = videos.setVideoHeight;
+    //let setVideoWidth = childRef.current!.getVideoWidth();
+    var setVideoWidth = videos.setVideoWidth;
+    if (osType == const_1.Resolutions.OsType.ANDROID) {
+      canvas.setAttribute("width", cameraResolutionsList[cameraOptions.value].maxHeight.toString());
+      canvas.setAttribute("height", cameraResolutionsList[cameraOptions.value].maxWidth.toString());
+    } else {
+      canvas.setAttribute("width", cameraResolutionsList[cameraOptions.value].maxWidth.toString());
+      canvas.setAttribute("height", cameraResolutionsList[cameraOptions.value].maxHeight.toString());
+    }
+    //checkbox.setAttribute("style", "margin-bottom:20px; text-alignn:left;");
+    var stylestr = "height:" + setVideoHeight + "px; width:" + setVideoWidth + "px;";
+    canvas.setAttribute("style", stylestr);
+    // SE再生
+    playSeShoot();
+    //canvasにコピー
+    if (osType == const_1.Resolutions.OsType.ANDROID) {
+      ctx.drawImage(video, 0, 0, cameraResolutionsList[cameraOptions.value].maxHeight, cameraResolutionsList[cameraOptions.value].maxWidth);
+    } else {
+      ctx.drawImage(video, 0, 0, cameraResolutionsList[cameraOptions.value].maxWidth, cameraResolutionsList[cameraOptions.value].maxHeight);
+    }
+    //div.appendChild(checkbox);
+    var imagesElement = document.getElementById('images');
+    //if(imageElement.){
+    if (imagesElement.children.length > 0) {
+      imagesElement.removeChild(videoListRef.current);
+    }
+    //}
+    imagesElement.appendChild(canvas);
+    //checkListRef.current.push(checkbox);
+    videoListRef.current = canvas;
+    //setCanvasList([...saveCanvasList,div]);
+    setButtonText("再撮影");
+    state.current = const_1.Resolutions.STATE.PLAY;
+  }
+  // 撮影用SEの再生
+  function playSeShoot() {
+    var se = document.getElementById('shootSe');
+    se.load();
+    se.currentTime = 0;
+    se.play();
+  }
+  // カウントダウン用SEの再生
+  function playSeCountDown() {
+    var se = document.getElementById('countDownSe');
+    se.load();
+    se.currentTime = 0;
+    se.play();
+  }
+  //画像解析開始
+  function nextStage() {
+    if (videoListRef.current == null) {
+      alert("まだ写真撮影が行われていません。");
+      return;
+    }
+    var photolist = photos;
+    photolist = [].concat(_toConsumableArray(photolist), [videoListRef.current]);
+    dispatch((0, slice_1.updatePhoto)(photolist));
+    var imagesElement = document.getElementById('images');
+    imagesElement.removeChild(videoListRef.current);
+    setButtonText("撮影");
+    videoListRef.current = null;
+    if (param.number <= photos.length + 1) {
+      // 画面遷移する
+      navigate('/photolist');
+    }
+  }
+  return react_1["default"].createElement("div", {
+    className: "App"
+  }, react_1["default"].createElement("a", null, (photos.length + 1).toString() + "枚目"), react_1["default"].createElement("a", null, "部位：" + param.parts), react_1["default"].createElement(VideoArea_1.VideoArea, {
+    ref: childRef
+  }), react_1["default"].createElement("div", {
+    className: "controls"
+  }, react_1["default"].createElement("button", {
+    onClick: shootImagePreparation
+  }, buttonText), react_1["default"].createElement("br", null), react_1["default"].createElement("div", {
+    className: "timer"
+  }, "Timer(s)", react_1["default"].createElement("input", {
+    type: "number",
+    step: "1",
+    min: "0",
+    max: "99",
+    id: "timer",
+    defaultValue: "0"
+  })), react_1["default"].createElement("p", {
+    id: "count",
+    className: "count"
+  })), react_1["default"].createElement("hr", null), react_1["default"].createElement("div", {
+    className: "controls"
+  }, react_1["default"].createElement("button", {
+    onClick: nextStage
+  }, "\u6B21\u3078"), react_1["default"].createElement("br", null)), react_1["default"].createElement("hr", null), "\u4FDD\u5B58", react_1["default"].createElement("form", {
+    method: "post",
+    action: "",
+    name: "images"
+  }, react_1["default"].createElement("div", {
+    className: 'canvas_list',
+    id: "images"
+  })), react_1["default"].createElement("audio", {
+    id: "shootSe",
+    preload: "auto",
+    src: "/storage/se/camera-shutter1.mp3"
+  }), react_1["default"].createElement("audio", {
+    id: "countDownSe",
+    preload: "auto",
+    src: "/storage/se/count-down1.mp3"
+  }));
+}
+exports["default"] = Photograph;
+
+/***/ }),
+
+/***/ "./resources/ts/components/PhotographList.tsx":
+/*!****************************************************!*\
+  !*** ./resources/ts/components/PhotographList.tsx ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+__webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+function PhotographList() {
+  var location = (0, react_router_dom_1.useLocation)();
+  var param = location.state; //型を無理やり与える
+  var dispatch = (0, react_redux_1.useDispatch)();
+  var _ref = (0, react_redux_1.useSelector)(function (store) {
+      return store.analysis;
+    }),
+    photos = _ref.photos,
+    videos = _ref.videos;
+  (0, react_1.useEffect)(function () {
+    initialise();
+  });
+  //画像解析開始
+  function initialise() {
+    var photolist = photos;
+    if (!photolist || photolist.length <= 0) {
+      return;
+    }
+    var imagesElement = document.getElementById('images');
+    for (var i = 0; i < photolist.length; i++) {
+      console.log("セット");
+      var div = document.createElement("div");
+      div.setAttribute("className", "canvas_list");
+      div.appendChild(photolist[i]);
+      imagesElement.appendChild(div);
+    }
+  }
+  return react_1["default"].createElement("div", {
+    className: "App"
+  }, react_1["default"].createElement("a", null, "\u4EE5\u4E0B\u306E\u30C7\u30FC\u30BF\u3092\u89E3\u6790\u3057\u307E\u3059\u3002"), react_1["default"].createElement("form", {
+    method: "post",
+    action: "",
+    name: "images",
+    id: "images"
+  }));
+}
+exports["default"] = PhotographList;
 
 /***/ }),
 
@@ -11847,6 +12200,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var react_2 = __importDefault(__webpack_require__(/*! @fullcalendar/react */ "./node_modules/@fullcalendar/react/dist/index.cjs"));
 var daygrid_1 = __importDefault(__webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/index.cjs"));
 var timegrid_1 = __importDefault(__webpack_require__(/*! @fullcalendar/timegrid */ "./node_modules/@fullcalendar/timegrid/index.cjs"));
@@ -11857,17 +12211,19 @@ var slice_1 = __webpack_require__(/*! ../reducks/store/slice */ "./resources/ts/
 var const_1 = __webpack_require__(/*! ../../ts/SystemConst/const */ "./resources/ts/SystemConst/const.ts");
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 function Top() {
-  var _ref = (0, react_1.useState)([]),
+  var navigate = (0, react_router_dom_1.useNavigate)();
+  var scedule = (0, react_1.useRef)([]);
+  var _ref = (0, react_1.useState)(false),
     _ref2 = _slicedToArray(_ref, 2),
-    scedule = _ref2[0],
-    setScedule = _ref2[1];
+    comp = _ref2[0],
+    setcomp = _ref2[1];
   var state = (0, react_1.useRef)(const_1.Resolutions.STATE.INIT);
+  var analysis = (0, react_1.useRef)({});
   var dispatch = (0, react_redux_1.useDispatch)();
   var _ref3 = (0, react_redux_1.useSelector)(function (store) {
-      return store.cart;
+      return store.analysis;
     }),
-    schedules = _ref3.schedules,
-    videos = _ref3.videos;
+    schedules = _ref3.schedules;
   //console.log(tests.test);
   /*let slecule:Array<Object> = [
     //{title:'明日は', start: '2023-04-09'},
@@ -11879,7 +12235,6 @@ function Top() {
       case const_1.Resolutions.STATE.INIT:
         state.current = const_1.Resolutions.STATE.PLAY;
         // 結果取得ファイルへ保存
-        var success = 0;
         axios_1["default"].get(const_1.Resolutions.URL + const_1.Resolutions.GET_SCHEDULE, {
           params: {
             user_id: 1
@@ -11906,12 +12261,43 @@ function Top() {
           } finally {
             _iterator.f();
           }
-          setScedule(newList);
+          scedule.current = newList;
         })["catch"](function (error) {
           console.error('ERROR:', error);
         });
         break;
       case const_1.Resolutions.STATE.PLAY:
+        var nowdate = new Date();
+        var isAnalysis = false;
+        console.log("現在：" + nowdate);
+        var _iterator2 = _createForOfIteratorHelper(schedules),
+          _step2;
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var val = _step2.value;
+            console.log("日付：" + new Date(val.start_time));
+            if (new Date(val.start_time) <= nowdate && new Date(val.end_time) >= nowdate) {
+              if (!val.completion) {
+                setcomp(true);
+                isAnalysis = true;
+                analysis.current = val;
+                console.log("パラメータ確認" + analysis.current.phpto_part);
+                break;
+              }
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+        if (!isAnalysis) {
+          alert("現在行える試験はありません");
+        } else {
+          state.current = const_1.Resolutions.STATE.COMP;
+        }
+        break;
+      case const_1.Resolutions.STATE.COMP:
         break;
     }
   });
@@ -11919,24 +12305,31 @@ function Top() {
     alert(e.event.title);
   }
   function startAnalysis() {
-    dispatch((0, slice_1.updateVideo)({
-      backCameraId: "",
-      osType: 0,
-      checkResolutions: [],
-      leftIndex: 9,
-      rightIndex: 0,
-      midIndex: 0,
-      cameraResolutionsList: {},
-      cameraOptions: null,
-      videoSelect: null,
-      maxResolutionWidth: 0,
-      maxResolutionHeight: 0,
-      videoInputs: [],
-      stream: null,
-      setVideoWidth: 0,
-      setVideoHeight: 0
+    /*dispatch(updateVideo({
+        backCameraId: "",
+        osType: 0,
+        checkResolutions:[],
+        leftIndex: 9,
+        rightIndex: 0,
+        midIndex: 0,
+        cameraResolutionsList: {},
+        cameraOptions: null,
+        videoSelect: null,
+        maxResolutionWidth: 0,
+        maxResolutionHeight: 0,
+        videoInputs: [],
+        stream: null,
+        setVideoWidth: 0,
+        setVideoHeight: 0
     }));
-    console.log(videos.leftIndex);
+    console.log(videos.leftIndex);*/
+    //navigate('/camera', {test:'test',test2:'test2'});
+    navigate('/camera', {
+      state: {
+        parts: analysis.current.phpto_part,
+        number: analysis.current.photo_number
+      }
+    });
   }
   return react_1["default"].createElement("div", {
     style: {
@@ -11945,9 +12338,9 @@ function Top() {
     }
   }, react_1["default"].createElement("div", {
     style: {
-      width: '50%',
+      width: '100%',
       position: 'absolute',
-      left: '50%'
+      left: '0%'
     }
   }, react_1["default"].createElement(react_2["default"], {
     plugins: [daygrid_1["default"], timegrid_1["default"], list_1["default"]],
@@ -11958,484 +12351,16 @@ function Top() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek listWeek'
     },
-    events: scedule,
+    events: scedule.current,
     eventClick: handleEventClick
   }), react_1["default"].createElement("div", {
     className: "controls"
   }, react_1["default"].createElement("button", {
-    onClick: startAnalysis
+    onClick: startAnalysis,
+    disabled: !comp
   }, "\u89E3\u6790\u958B\u59CB"), react_1["default"].createElement("br", null))));
 }
 exports["default"] = Top;
-
-/***/ }),
-
-/***/ "./resources/ts/components/TopCamera.tsx":
-/*!***********************************************!*\
-  !*** ./resources/ts/components/TopCamera.tsx ***!
-  \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  __setModuleDefault(result, mod);
-  return result;
-};
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-var VideoArea_1 = __webpack_require__(/*! ./VideoArea */ "./resources/ts/components/VideoArea.tsx");
-var const_1 = __webpack_require__(/*! ../../ts/SystemConst/const */ "./resources/ts/SystemConst/const.ts");
-__webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
-//import { useDispatch, useSelector } from "react-redux";
-//import { SET_VIDEO, setAction } from "../reducks/video/actions";
-//import {Videos} from "../reducks/store/initialState";
-function TopCamera() {
-  //const dispatch = useDispatch();
-  //const selector = useSelector((state:Videos) => state);
-  /*dispatch(setAction({
-    backCameraId: "",
-    osType: 0,
-    checkResolutions:[],
-    leftIndex: 0,
-    rightIndex: 0,
-    midIndex: 0,
-    cameraResolutionsList: {},
-    cameraOptions: null,
-    videoSelect: null,
-    maxResolutionWidth: 0,
-    maxResolutionHeight: 0,
-    videoInputs: [],
-    stream: null,
-    setVideoWidth: 0,
-    setVideoHeight: 0
-  }));*/
-  var _ref = (0, react_1.useState)(false),
-    _ref2 = _slicedToArray(_ref, 2),
-    visible = _ref2[0],
-    setVisible = _ref2[1];
-  var _ref3 = (0, react_1.useState)([]),
-    _ref4 = _slicedToArray(_ref3, 2),
-    saveCanvasList = _ref4[0],
-    setCanvasList = _ref4[1];
-  var state = (0, react_1.useRef)(const_1.Resolutions.STATE.INIT);
-  var childRef = (0, react_1.useRef)(null);
-  var videoListRef = (0, react_1.useRef)([]);
-  var checkListRef = (0, react_1.useRef)([]);
-  //let state = Resolutions.STATE.INIT;
-  //console.log("変数宣言");
-  (0, react_1.useEffect)(function () {
-    //console.log("状態:" + state);
-    switch (state.current) {
-      case const_1.Resolutions.STATE.INIT:
-        //cameraOptions = document.querySelector('.video-options>select');
-        //videoSelect = document.querySelector('select#videoSource');
-        //console.log("チェック");
-        //console.log(selector.backCameraId);
-        start();
-        break;
-      case const_1.Resolutions.STATE.PLAY:
-        break;
-      case const_1.Resolutions.STATE.ANALYSIS:
-        break;
-      case const_1.Resolutions.STATE.REQUEST:
-        sendImage();
-        break;
-    }
-  });
-  // 開始処理
-  function start() {
-    console.log("チェック");
-    childRef.current.setVideo();
-  }
-  //画像撮影の準備
-  function shootImagePreparation() {
-    // 撮影タイマー待機
-    var timerElement = document.getElementById('timer');
-    var countElement = document.getElementById('count');
-    var count = timerElement == null ? 0 : Number(timerElement.value);
-    if (count > 0) {
-      countElement.textContent = count.toString();
-      playSeCountDown();
-      return new Promise(function (resolve) {
-        var timer = setInterval(function () {
-          // 撮影タイマー待機
-          var count = countElement == null ? 0 : Number(countElement.textContent);
-          if (count > 1) {
-            countElement.textContent = (count - 1).toString();
-            playSeCountDown();
-          } else {
-            countElement.textContent = '0';
-            shootImageMain();
-            clearInterval(timer);
-            return resolve();
-          }
-        }, 1000);
-      });
-    } else {
-      shootImageMain();
-    }
-  }
-  // 画像撮影
-  function shootImageMain() {
-    var _a;
-    var imageCount = getImageCount();
-    if (imageCount >= 5) {
-      alert('5件までしか撮影できません');
-      return;
-    }
-    var video = (_a = childRef.current) === null || _a === void 0 ? void 0 : _a.getVideo();
-    //var video = document.getElementById('video');
-    var div = document.createElement("div");
-    div.setAttribute("className", "canvas_list");
-    var canvas = document.createElement("canvas");
-    //canvasの描画モードを2sに
-    var ctx = canvas.getContext('2d');
-    var checkbox = document.createElement('input');
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("name", "image[]");
-    //同じサイズをcanvasに指定
-    var osType = childRef.current.getOsType();
-    var cameraOptions = childRef.current.getCameraOptions();
-    var cameraResolutionsList = childRef.current.getCameraResolutionsList();
-    var setVideoHeight = childRef.current.getVideoHeight();
-    var setVideoWidth = childRef.current.getVideoWidth();
-    if (osType == const_1.Resolutions.OsType.ANDROID) {
-      canvas.setAttribute("width", cameraResolutionsList[cameraOptions.value].maxHeight.toString());
-      canvas.setAttribute("height", cameraResolutionsList[cameraOptions.value].maxWidth.toString());
-    } else {
-      canvas.setAttribute("width", cameraResolutionsList[cameraOptions.value].maxWidth.toString());
-      canvas.setAttribute("height", cameraResolutionsList[cameraOptions.value].maxHeight.toString());
-    }
-    checkbox.setAttribute("style", "margin-bottom:20px; text-alignn:left;");
-    var stylestr = "height:" + setVideoHeight + "px; width:" + setVideoWidth + "px;";
-    canvas.setAttribute("style", stylestr);
-    // SE再生
-    playSeShoot();
-    //canvasにコピー
-    if (osType == const_1.Resolutions.OsType.ANDROID) {
-      ctx.drawImage(video, 0, 0, cameraResolutionsList[cameraOptions.value].maxHeight, cameraResolutionsList[cameraOptions.value].maxWidth);
-    } else {
-      ctx.drawImage(video, 0, 0, cameraResolutionsList[cameraOptions.value].maxWidth, cameraResolutionsList[cameraOptions.value].maxHeight);
-    }
-    console.log("ここまで１");
-    div.appendChild(checkbox);
-    div.appendChild(canvas);
-    console.log("ここまで２");
-    var imagesElement = document.getElementById('images');
-    console.log("ここまで３：" + imagesElement);
-    imagesElement.appendChild(div);
-    console.log("ここまで4");
-    checkListRef.current.push(checkbox);
-    videoListRef.current.push(canvas);
-    setCanvasList([].concat(_toConsumableArray(saveCanvasList), [div]));
-    console.log("追加");
-  }
-  // 撮影用SEの再生
-  function playSeShoot() {
-    var se = document.getElementById('shootSe');
-    se.load();
-    se.currentTime = 0;
-    se.play();
-  }
-  // カウントダウン用SEの再生
-  function playSeCountDown() {
-    var se = document.getElementById('countDownSe');
-    se.load();
-    se.currentTime = 0;
-    se.play();
-  }
-  //画像削除
-  function removeImage() {
-    //let images:HTMLCollectionOf<HTMLElement> | null = document.getElementById('images') as HTMLCollectionOf<HTMLElement> | null;
-    //let checkBoxElement : HTMLCollectionOf<HTMLInputElement> | null = document.getElementById('image[]') as HTMLCollectionOf<HTMLInputElement> | null;
-    //let imageCollection:HTMLCollectionOf<HTMLElement> = document.images as HTMLCollectionOf<HTMLElement>;
-    console.log("イメージ：" + videoListRef.current.length);
-    if (videoListRef.current.length == 0) {
-      return;
-    }
-    /*let obj:HTMLImageElement | null = imageCollection.elements['image[]'] as HTMLImageElement | null;
-    if(!obj){
-      return;
-    }*/
-    //let images:HTMLCollectionOf<HTMLElement> | null = document.getElementById('images') as HTMLCollectionOf<HTMLElement> | null;
-    var len = videoListRef.current.length;
-    var imagesElement = document.getElementById('images');
-    if (len == 1) {
-      if (checkListRef.current[0].checked) {
-        var checkFlg = window.confirm('1件の画像を削除しますか？');
-        if (checkFlg) {
-          console.log("チェック0：" + imagesElement);
-          imagesElement.removeChild(saveCanvasList[0]);
-          console.log("チェック1：" + imagesElement);
-          setCanvasList([]);
-          videoListRef.current.splice(0);
-          checkListRef.current.splice(0);
-          console.log("チェック2：" + videoListRef.current.length);
-        }
-      }
-    } else {
-      var deletecount = 0;
-      checkListRef.current.forEach(function (element) {
-        if (element.checked) {
-          deletecount++;
-        }
-      });
-      if (deletecount > 0) {
-        var _checkFlg = window.confirm(deletecount + '件の画像を削除しますか？');
-        if (_checkFlg) {
-          for (var i = len - 1; i >= 0; i--) {
-            if (checkListRef.current[i].checked) {
-              imagesElement.removeChild(saveCanvasList[i]);
-              setCanvasList(saveCanvasList.filter(function (item, index) {
-                return index !== i;
-              }));
-              videoListRef.current.splice(i);
-              checkListRef.current.splice(i);
-            }
-          }
-        }
-      }
-    }
-  }
-  //画像解析開始
-  function startAnalysis() {
-    state.current = const_1.Resolutions.STATE.REQUEST;
-    setVisible(true);
-    //sendImage();
-  }
-  // 解析対象画像送信
-  function sendImage() {
-    if (videoListRef.current.length == 0) {
-      return;
-    }
-    /*var obj = document.images.elements['image[]'];
-    if(!obj){
-      return;
-    }
-    var images = document.getElementById('images');
-    var len = obj.length;l*/
-    var len = videoListRef.current.length;
-    var imagesElement = document.getElementById('images');
-    if (len == 1) {
-      if (checkListRef.current[0].checked) {
-        var checkFlg = window.confirm('1件の画像を解析しますか？');
-        if (checkFlg) {
-          moveFile(0, videoListRef.current[0]);
-        }
-      }
-    } else {
-      var sendcount = 0;
-      checkListRef.current.forEach(function (element) {
-        if (element.checked) {
-          sendcount++;
-        }
-      });
-      if (sendcount > 0) {
-        var _checkFlg2 = window.confirm(sendcount + '件の画像を解析しますか？');
-        if (_checkFlg2) {
-          for (var i = len - 1; i >= 0; i--) {
-            if (checkListRef.current[i].checked) {
-              moveFile(i, videoListRef.current[i]);
-            }
-          }
-        }
-      }
-    }
-    state.current = const_1.Resolutions.STATE.ANALYSIS;
-    waitResult();
-  }
-  // カメラ変更
-  /*function changeVideo(){
-    //console.log("videoChange()");
-       for (let track of stream.getTracks()) {
-        track.stop()
-    }
-    //console.log("cameraOptions.value :", cameraOptions.value);
-    findMaximumWidthHeightForCamera();
-  }*/
-  // 撮影した画像の数を取得
-  function getImageCount() {
-    var checkBoxElement = document.getElementById('image[]');
-    if (!checkBoxElement) {
-      return 0;
-    }
-    var len = checkBoxElement.item.length;
-    if (!len) {
-      return 1;
-    } else {
-      return len;
-    }
-  }
-  //画像ダウンロード
-  /*function downloadFile(canvas) {
-    //canvasからpng生成してダウンロードする
-    const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/jpeg", 1);
-    a.download = "image.jpeg";
-    a.click();
-  }*/
-  //解析ファイルの送信
-  function moveFile(order, canvas) {
-    //canvasからpng生成してダウンロードする
-    var base64 = canvas.toDataURL("image/png", 1);
-    // ファイルへ保存
-    axios_1["default"].post(const_1.Resolutions.URL + const_1.Resolutions.SEND_FILE, {
-      no: order,
-      date: base64
-    }).then(function (res) {
-      //送信完了
-      console.log("送信完了");
-    })["catch"](function (error) {
-      console.error('ERROR:', error);
-    });
-  }
-  //解析中
-  function waitResult() {
-    // 結果取得ファイルへ保存
-    var success = 0;
-    axios_1["default"].get(const_1.Resolutions.URL + const_1.Resolutions.GET_RESULT, {
-      params: {
-        exam_id: 1,
-        exam_date: '2023-03-20',
-        user_id: '00001',
-        photo_part: 1
-      }
-    }).then(function (res) {
-      //送信完了
-      //console.log("送信完了");
-      console.log(res.data);
-      if ('success' in res.data) {
-        success = res.data.success;
-        console.log("結果:" + success);
-        setVisible(false);
-        state.current = const_1.Resolutions.STATE.PLAY;
-        if (!success) {
-          alert("解析は成功しました。");
-        } else {
-          alert("解析は失敗しました。\n再度写真を撮影し解析開始を行なってください。");
-        }
-      } else {
-        console.log("繰り返し");
-        setTimeout(waitResult, 3000);
-      }
-    })["catch"](function (error) {
-      console.error('ERROR:', error);
-    });
-  }
-  return react_1["default"].createElement("div", {
-    className: "App"
-  }, react_1["default"].createElement(VideoArea_1.VideoArea, {
-    ref: childRef
-  }), react_1["default"].createElement("div", {
-    className: "controls"
-  }, react_1["default"].createElement("button", {
-    onClick: shootImagePreparation
-  }, "\u64AE\u5F71"), react_1["default"].createElement("br", null), react_1["default"].createElement("div", {
-    className: "timer"
-  }, "Timer(s)", react_1["default"].createElement("input", {
-    type: "number",
-    step: "1",
-    min: "0",
-    max: "99",
-    id: "timer",
-    defaultValue: "0"
-  })), react_1["default"].createElement("p", {
-    id: "count",
-    className: "count"
-  })), react_1["default"].createElement("hr", null), react_1["default"].createElement("div", {
-    className: "controls"
-  }, react_1["default"].createElement("button", {
-    onClick: removeImage
-  }, "\u524A\u9664"), react_1["default"].createElement("br", null), react_1["default"].createElement("button", {
-    onClick: startAnalysis
-  }, "\u89E3\u6790\u958B\u59CB"), react_1["default"].createElement("br", null)), react_1["default"].createElement("hr", null), "\u4FDD\u5B58", react_1["default"].createElement("form", {
-    method: "post",
-    action: "",
-    name: "images",
-    id: "images"
-  }), react_1["default"].createElement("div", {
-    id: "overlay",
-    className: "overlay",
-    style: {
-      visibility: visible ? "visible" : "hidden"
-    }
-  }, react_1["default"].createElement("div", {
-    style: {
-      position: "relative"
-    }
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("a", {
-    style: {
-      position: "absolute",
-      left: 10,
-      top: -10,
-      color: 'white',
-      fontSize: 30
-    }
-  }, "\u89E3\u6790\u4E2D..."), react_1["default"].createElement("div", {
-    className: "loader"
-  })))), react_1["default"].createElement("audio", {
-    id: "shootSe",
-    preload: "auto",
-    src: "/storage/se/camera-shutter1.mp3"
-  }), react_1["default"].createElement("audio", {
-    id: "countDownSe",
-    preload: "auto",
-    src: "/storage/se/count-down1.mp3"
-  }));
-}
-exports["default"] = TopCamera;
-/*if (document.getElementById('top_camera')) {
-  const top_camera = createRoot(document.getElementById('top_camera')!)
-  top_camera.render(<TopCamera />)
-  //ReactDOM.render(<TopCamera />, document.getElementById('top_camera'));
-}*/
 
 /***/ }),
 
@@ -12518,7 +12443,18 @@ exports.VideoArea = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var const_1 = __webpack_require__(/*! ../../ts/SystemConst/const */ "./resources/ts/SystemConst/const.ts");
 __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var slice_1 = __webpack_require__(/*! ../reducks/store/slice */ "./resources/ts/reducks/store/slice.ts");
 exports.VideoArea = (0, react_1.forwardRef)(function (props, ref) {
+  var location = (0, react_router_dom_1.useLocation)();
+  var param = location.state; //型を無理やり与える
+  var dispatch = (0, react_redux_1.useDispatch)();
+  var _ref = (0, react_redux_1.useSelector)(function (store) {
+      return store.analysis;
+    }),
+    videos = _ref.videos;
+  //const state = useRef<number>(Resolutions.STATE.INIT);
   var backCameraId = null;
   var osType = 0;
   var checkResolutions = [];
@@ -12542,26 +12478,28 @@ exports.VideoArea = (0, react_1.forwardRef)(function (props, ref) {
     return {
       // 開始処理
       setVideo: function setVideo() {
-        console.log("チェック2");
-        var ua = window.navigator.userAgent.toLowerCase();
-        console.log("端末情報:" + ua);
-        if (ua.indexOf('iPhone') > 0 || ua.indexOf('iphone') > 0) {
-          //console.log("端末 : iPhone");
-          osType = const_1.Resolutions.OsType.IPHONE;
-          checkResolutions = const_1.Resolutions.ResolutionsToCheckIphone;
-        } else if (ua.indexOf('Android') > 0 || ua.indexOf('android') > 0) {
-          //console.log("端末 : Android");
-          osType = const_1.Resolutions.OsType.ANDROID;
-          checkResolutions = const_1.Resolutions.ResolutionsToCheckPcAndroid;
-        } else {
-          //console.log("端末 : PC");
-          osType = const_1.Resolutions.OsType.PC;
-          checkResolutions = const_1.Resolutions.ResolutionsToCheckPcAndroid;
+        if (!Object.keys(videos).length) {
+          console.log("チェック2");
+          var ua = window.navigator.userAgent.toLowerCase();
+          console.log("端末情報:" + ua);
+          if (ua.indexOf('iPhone') > 0 || ua.indexOf('iphone') > 0) {
+            //console.log("端末 : iPhone");
+            osType = const_1.Resolutions.OsType.IPHONE;
+            checkResolutions = const_1.Resolutions.ResolutionsToCheckIphone;
+          } else if (ua.indexOf('Android') > 0 || ua.indexOf('android') > 0) {
+            //console.log("端末 : Android");
+            osType = const_1.Resolutions.OsType.ANDROID;
+            checkResolutions = const_1.Resolutions.ResolutionsToCheckPcAndroid;
+          } else {
+            //console.log("端末 : PC");
+            osType = const_1.Resolutions.OsType.PC;
+            checkResolutions = const_1.Resolutions.ResolutionsToCheckPcAndroid;
+          }
+          rightIndex = checkResolutions.length;
+          // カメラの最大解像度の検索
+          findMaximumWidthHeightForCamera();
+          console.log("チェック３");
         }
-        rightIndex = checkResolutions.length;
-        // カメラの最大解像度の検索
-        findMaximumWidthHeightForCamera();
-        console.log("チェック３");
       },
       getOsType: function getOsType() {
         return osType;
@@ -12785,6 +12723,23 @@ exports.VideoArea = (0, react_1.forwardRef)(function (props, ref) {
               }
             }
             //console.log("設定するVideoのサイズ : 横 : ", setVideoWidth, " : 縦 : ", setVideoHeight);
+            dispatch((0, slice_1.updateVideo)({
+              backCameraId: backCameraId,
+              osType: osType,
+              checkResolutions: checkResolutions,
+              leftIndex: leftIndex,
+              rightIndex: rightIndex,
+              midIndex: midIndex,
+              cameraResolutionsList: cameraResolutionsList,
+              cameraOptions: cameraOptions,
+              videoSelect: videoSelect,
+              maxResolutionWidth: maxResolutionWidth,
+              maxResolutionHeight: maxResolutionHeight,
+              videoInputs: videoInputs,
+              stream: stream,
+              setVideoWidth: setVideoWidth,
+              setVideoHeight: setVideoHeight
+            }));
             return _context2.abrupt("return", new Promise(function (resolve) {
               video.onloadedmetadata = function () {
                 video.width = setVideoWidth;
@@ -12792,7 +12747,7 @@ exports.VideoArea = (0, react_1.forwardRef)(function (props, ref) {
                 resolve();
               };
             }));
-          case 9:
+          case 10:
           case "end":
             return _context2.stop();
         }
@@ -12899,8 +12854,9 @@ var client_1 = __webpack_require__(/*! react-dom/client */ "./node_modules/react
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 var store_1 = __webpack_require__(/*! ../reducks/store/store */ "./resources/ts/reducks/store/store.ts");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-var TopCamera_1 = __importDefault(__webpack_require__(/*! ./TopCamera */ "./resources/ts/components/TopCamera.tsx"));
 var Top_1 = __importDefault(__webpack_require__(/*! ./Top */ "./resources/ts/components/Top.tsx"));
+var Photograph_1 = __importDefault(__webpack_require__(/*! ./Photograph */ "./resources/ts/components/Photograph.tsx"));
+var PhotographList_1 = __importDefault(__webpack_require__(/*! ./PhotographList */ "./resources/ts/components/PhotographList.tsx"));
 //const store = createStore();
 if (document.getElementById("root")) {
   var container = document.getElementById('root');
@@ -12912,7 +12868,10 @@ if (document.getElementById("root")) {
     element: react_1["default"].createElement(Top_1["default"], null)
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/camera",
-    element: react_1["default"].createElement(TopCamera_1["default"], null)
+    element: react_1["default"].createElement(Photograph_1["default"], null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/photolist",
+    element: react_1["default"].createElement(PhotographList_1["default"], null)
   })))));
 }
 
@@ -12930,7 +12889,7 @@ if (document.getElementById("root")) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.updateVideo = exports.updateSchedule = void 0;
+exports.updatePhoto = exports.updateVideo = exports.updateSchedule = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /*export const initialState = {
     users: {
@@ -12942,49 +12901,42 @@ var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@red
   };*/
 var initialState = {
   schedules: [],
-  videos: {
-    backCameraId: "",
-    osType: 0,
-    checkResolutions: [],
-    leftIndex: 0,
-    rightIndex: 0,
-    midIndex: 0,
-    cameraResolutionsList: {},
-    cameraOptions: null,
-    videoSelect: null,
-    maxResolutionWidth: 0,
-    maxResolutionHeight: 0,
-    videoInputs: [],
-    stream: null,
-    setVideoWidth: 0,
-    setVideoHeight: 0
-  }
+  photos: [],
+  videos: {}
 };
-var cartSlice = (0, toolkit_1.createSlice)({
-  name: "cart",
+var analysisSlice = (0, toolkit_1.createSlice)({
+  name: "analysis",
   initialState: initialState,
   reducers: {
     // プロパティ名がactionCreatorとして作られる
     updateVideo: function updateVideo(state, actions) {
-      // 空にする
       return {
         schedules: state.schedules,
+        photos: state.photos,
         videos: actions.payload
       };
     },
     updateSchedule: function updateSchedule(state, actions) {
-      // 空にする
       return {
         videos: state.videos,
+        photos: state.photos,
         schedules: actions.payload
+      };
+    },
+    updatePhoto: function updatePhoto(state, actions) {
+      return {
+        videos: state.videos,
+        schedules: state.schedules,
+        photos: actions.payload
       };
     }
   } // reducerを格納、actionCreatorはreducerを作成すると自動的に作られる
 });
-// console.log(cartSlice); //actions.clearCartがある
-exports.updateSchedule = cartSlice.actions.updateSchedule;
-exports.updateVideo = cartSlice.actions.updateVideo;
-exports["default"] = cartSlice.reducer; // reducerをexport
+
+exports.updateSchedule = analysisSlice.actions.updateSchedule;
+exports.updateVideo = analysisSlice.actions.updateVideo;
+exports.updatePhoto = analysisSlice.actions.updatePhoto;
+exports["default"] = analysisSlice.reducer; // reducerをexport
 /*export const videos:Videos = {
   backCameraId: "",
   osType: 0,
@@ -13045,7 +12997,16 @@ var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@red
 var slice_1 = __importDefault(__webpack_require__(/*! ./slice */ "./resources/ts/reducks/store/slice.ts")); // reducerをimport
 exports.store = (0, toolkit_1.configureStore)({
   reducer: {
-    cart: slice_1["default"] // reducerを追加
+    analysis: slice_1["default"] // reducerを追加
+  },
+
+  middleware: function middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['analysis/updatePhoto' // この action に対しては serializableCheck しない
+        ]
+      }
+    });
   }
 });
 
