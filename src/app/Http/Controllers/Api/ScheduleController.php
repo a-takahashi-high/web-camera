@@ -26,4 +26,14 @@ class ScheduleController extends Controller
         $items = Schedule::select('*')->where('user_id', $user_id)->get();
         return response()->json($items);
     }
+
+    public function updateScheduleResult(Request $request) {
+        $id = $request->input('id');
+        $completion = $request->input('completion');
+        
+
+        Schedule::where('id', $id)->update(['completion' => $completion]);
+
+        //return response()->json($items);
+    }
 }

@@ -57,5 +57,6 @@ export const Resolutions = {
     SEND_FILE: "send_file",
     GET_RESULT: "result",
     GET_SCHEDULE: "schedules",
+    UPDATE_SCHEDULE: "update_schedule",
     GET_SCHEDULE_ALL: "schedule_all"
   }

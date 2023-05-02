@@ -24,6 +24,8 @@ Route::get('/schedule_all', [ScheduleController::class, 'getScheduleAll']);
 
 Route::get('/schedules', [ScheduleController::class, 'getSchedule']);
 
+Route::post('/update_schedule', [ScheduleController::class, 'updateScheduleResult']);
+
 Route::get('/analysis', [AnalysisController::class, 'getAllAnalysisMain']);
 
 Route::get('/result', [AnalysisController::class, 'getResult']);

@@ -70,6 +70,14 @@ export const VideoArea = forwardRef<VideoAreaHandles>((props,ref) => {
           // カメラの最大解像度の検索
           findMaximumWidthHeightForCamera();
           console.log("チェック３");
+        }else{
+          cameraOptions = videos.cameraOptions;
+          videoInputs = videos.videoInputs;
+          cameraResolutionsList = videos.cameraResolutionsList;
+          osType = videos.osType;
+          setVideoWidth = videos.setVideoWidth;
+          setVideoHeight = videos.setVideoHeight;
+          setVideoSizeSecond();
         }
 
       },
@@ -319,10 +327,25 @@ export const VideoArea = forwardRef<VideoAreaHandles>((props,ref) => {
         resolve();
       };
     });
+  }
 
+  // 撮影ビデオのサイズ設定
+  async function setVideoSizeSecond() {
+    var video:HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement | null;
+    stream = await setVideoResolution(
+      cameraResolutionsList[cameraOptions!.value].maxWidth , 
+      cameraResolutionsList[cameraOptions!.value].maxHeight
+    );
 
+    video!.srcObject = stream;
+    return new Promise<void>((resolve) => {
+      video!.onloadedmetadata = () => {
+        video!.width = setVideoWidth;
+        video!.height = setVideoHeight;
 
-
+        resolve();
+      };
+    });
   }
 
   // 撮影用ビデオの解像度設定

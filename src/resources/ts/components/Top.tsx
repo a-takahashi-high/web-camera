@@ -4,6 +4,8 @@ import FullCalendar  from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import jaLocale from '@fullcalendar/core/locales/ja';
+import Button_Main from './Button';
+import Header from './Header';
 import listPlugin from '@fullcalendar/list';
 import { useSelector, useDispatch } from "react-redux";
 import { updateSchedule } from '../reducks/store/slice';
@@ -95,32 +97,11 @@ function Top() {
   }
 
   function startAnalysis(){
-    /*dispatch(updateVideo({
-        backCameraId: "",
-        osType: 0,
-        checkResolutions:[],
-        leftIndex: 9,
-        rightIndex: 0,
-        midIndex: 0,
-        cameraResolutionsList: {},
-        cameraOptions: null,
-        videoSelect: null,
-        maxResolutionWidth: 0,
-        maxResolutionHeight: 0,
-        videoInputs: [],
-        stream: null,
-        setVideoWidth: 0,
-        setVideoHeight: 0
-    }));
-    console.log(videos.leftIndex);*/
-    //navigate('/camera', {test:'test',test2:'test2'});
-    navigate('/camera',{state: {parts:(analysis.current as any).phpto_part, number:(analysis.current as any).photo_number}})
+    console.log("クリックされました。");
+    navigate('/camera',{state: {id:(analysis.current as any).id, parts:(analysis.current as any).phpto_part, number:(analysis.current as any).photo_number }})
   }
-
-  return (
-    <div style={{width: '100%', position:'relative'}}>
-      <div style={{width: '100%', position:'absolute', left: '0%'}}>
-        <FullCalendar
+  /*
+          <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
           locales={[jaLocale]}
           locale='ja'
@@ -132,9 +113,22 @@ function Top() {
           events={scedule.current}
           eventClick={handleEventClick}
         />
-        <div className="controls">
-          <button onClick={startAnalysis} disabled={!comp}>解析開始</button><br/>
-        </div>
+        */
+
+  return (
+    <div>
+      <Header />
+      <hr/>
+      <a>現在行える試験</a>
+      <div>テスト</div>
+      <div className="controls">
+        <Button_Main 
+        shape="contained" 
+        color="primary" 
+        onClick={startAnalysis} 
+        disabled={!comp} 
+        content="解析開始" />
+        <br/>
       </div>
     </div>
   );

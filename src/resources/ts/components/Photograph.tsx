@@ -174,7 +174,7 @@ function Photograph() {
     videoListRef.current = null;
     if(((param as any).number as number) <= photos.length + 1){
       // 画面遷移する
-      navigate('/photolist');
+      navigate('/photolist',{state: {id:(param as any).id, parts:(param as any).parts}});
     }
   }
 

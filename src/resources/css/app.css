@@ -1,3 +1,11 @@
+.header {
+    margin-left: 10px;
+}
+  
+.header h1 {
+    margin: 5px 0 10px
+}
+
 video {
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
@@ -26,18 +34,18 @@ canvas {
     display: flex;
 }
 
-.controls > button {
+/*.controls > button {
     width: 45px;
     height: 45px;
     text-align: center;
     border-radius: 100%;
     margin: 0 6px;
     background: transparent;
-}
+}*/
 
-.controls > button:hover svg {
+/*.controls > button:hover svg {
     color: white !important;
-}
+}*/
 
 @media (min-width: 300px) and (max-width: 400px) {
     .controls {
@@ -49,7 +57,7 @@ canvas {
     }
 }
 
-.controls > button > svg {
+/*.controls > button > svg {
     height: 20px;
     width: 18px;
     text-align: center;
@@ -88,7 +96,7 @@ canvas {
     border-radius: 100%;
     margin: 0 6px;
     background: rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .changes {
     margin: 8px 8px;
